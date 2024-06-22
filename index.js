@@ -11,6 +11,7 @@ const swaggerDocument = require('./swagger-output.json');
 // const loginRouter = require("./src/modules/login/login.routes");
 const taskRouter = require("./src/modules/task/task.routes");
 const usuarioRouter = require("./src/modules/user/user.routes");
+const clienteRouter = require("./src/modules/client/cliente.routes");
 
 
 // Secure setup
@@ -43,6 +44,7 @@ app.get("/", async (request, response) => {
 // Routers
 app.use(taskRouter);
 app.use(usuarioRouter);
+app.use(clienteRouter);
 
 
 app.all('*', (req, res, next) => {
