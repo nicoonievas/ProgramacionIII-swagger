@@ -4,19 +4,28 @@ const taskService = require("./task.service");
 const router = express.Router();
 
 // GET /api/task
+// GET /api/task
+// GET /api/task
 router.get("/api/task", async (req, res) => {
   // #swagger.tags = ['Task']
   try {
-    params = JSON.parse(req.headers['params'])
+    const { page = 1, perPage = 10 } = req.query; // Obtener parámetros de la consulta
+    const options = {
+      page: parseInt(page), // Convertir a número
+      limit: parseInt(perPage), // Convertir a número
+    };
 
-    let paginated = await taskService.paginated(params)
+    // Suponiendo que estás utilizando un servicio para paginar las tareas
+    let paginated = await taskService.paginated(options);
     return res.status(200).send(paginated);
 
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(500).send(error);
   }
 });
+
+
 
 // GET /api/task/:id
 router.get("/api/task/:id",  async (req, res) => {
